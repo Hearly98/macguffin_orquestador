@@ -36,9 +36,5 @@ public class MovieController {
     public ResponseEntity<MovieUpdateDTO> updateMovie(@PathVariable("id") Long movieId, @RequestBody MovieUpdateDTO movieUpdateDTO) {
         return movieService.updateMovie(movieId, movieUpdateDTO);
     }
-    @GetMapping("/user/{userId}/can-watch-movies")
-    public ResponseEntity<String> canWatchMovies(@PathVariable Integer userId) {
-        return subsService.hasActiveSubscription(userId);
-    }
 
 }

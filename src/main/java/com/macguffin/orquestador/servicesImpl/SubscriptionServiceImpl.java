@@ -9,10 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-
 @Service
 @RequiredArgsConstructor
 public class SubscriptionServiceImpl implements SubscriptionService {
@@ -47,6 +43,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscriptionFeignClient.activateSubscription(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
     @Override
     public ResponseEntity<SubscriptionDTO> updateSubscription(Integer userId, SubscriptionDTO newSubscriptionData) {
         if (!userFeignClient.userExists(userId)) {

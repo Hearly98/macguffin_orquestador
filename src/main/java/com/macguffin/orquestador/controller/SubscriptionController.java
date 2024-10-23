@@ -31,4 +31,8 @@ public class SubscriptionController {
     public ResponseEntity<SubscriptionDTO> updateSubscription(@PathVariable Integer userId,@RequestBody SubscriptionDTO subscriptionData){
         return subscriptionService.updateSubscription(userId, subscriptionData);
     }
+    @PostMapping("/{userId}/verifyUserSubscription")
+    public ResponseEntity<String> verifyUserSubscription(@PathVariable Integer userId){
+        return subscriptionService.verifyUserSubscription(userId);
+    }
 }
