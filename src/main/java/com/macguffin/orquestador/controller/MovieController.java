@@ -3,6 +3,7 @@ package com.macguffin.orquestador.controller;
 import com.macguffin.orquestador.dtos.MovieDTO;
 import com.macguffin.orquestador.dtos.MovieUpdateDTO;
 import com.macguffin.orquestador.services.MovieService;
+import com.macguffin.orquestador.services.SubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MovieController {
     private final MovieService movieService;
+    private final SubscriptionService subsService;
     @GetMapping()
     public ResponseEntity<List<MovieDTO>> getAllMovies() {
         return movieService.getAllMovies();
@@ -34,4 +36,9 @@ public class MovieController {
     public ResponseEntity<MovieUpdateDTO> updateMovie(@PathVariable("id") Long movieId, @RequestBody MovieUpdateDTO movieUpdateDTO) {
         return movieService.updateMovie(movieId, movieUpdateDTO);
     }
+    @GetMapping("/user/{userId}/can-watch-movies")
+    public ResponseEntity<String> canWatchMovies(@PathVariable Integer userId) {
+        return subsService.hasActiveSubscription(userId);
+    }
+
 }

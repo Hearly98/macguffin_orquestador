@@ -47,7 +47,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscriptionFeignClient.activateSubscription(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-@Override
+    @Override
     public ResponseEntity<SubscriptionDTO> updateSubscription(Integer userId, SubscriptionDTO newSubscriptionData) {
         if (!userFeignClient.userExists(userId)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -58,5 +58,21 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         }
         SubscriptionDTO updatedSubscription = subscriptionFeignClient.updateSubscription(userId, newSubscriptionData);
         return new ResponseEntity<>(updatedSubscription, HttpStatus.OK);
+    }
+    @Override
+    public ResponseEntity<String> verifyUserSubscription(Integer userId) {
+        if (!userFeignClient.userExists(userId)) {
+            return new ResponseEntity<>("El usuario no existe.", HttpStatus.NOT_FOUND);
+        }
+        SubscriptionDTO subscription = subscriptionFeignClient.getSubByUserId(userId);
+        if (subscription == null) {
+            return new ResponseEntity<>("El usuario no tiene ninguna suscripción registrada.", HttpStatus.OK);
+        }
+        Boolean hasActiveSubscription = subscriptionFeignClient.hasActiveSubscription(userId);
+        if (hasActiveSubscription) {
+            return new ResponseEntity<>("El usuario tiene una suscripción activa.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("El usuario tiene una suscripción inactiva.", HttpStatus.OK);
+        }
     }
 }

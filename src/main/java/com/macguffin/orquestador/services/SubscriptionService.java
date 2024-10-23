@@ -10,6 +10,7 @@ public interface SubscriptionService {
     ResponseEntity<Void> deactivateSubscription(Integer userId);
 
     ResponseEntity<Void> activateSubscription(Integer userId);
+    ResponseEntity<String> verifyUserSubscription(Integer userId);
 
     ResponseEntity<SubscriptionDTO> updateSubscription(Integer userId, SubscriptionDTO newSubscriptionData);
 }

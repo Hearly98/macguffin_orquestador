@@ -35,4 +35,5 @@ public interface SubscriptionFeignClient {
     Long countInactiveSubscriptions();
     @GetMapping("/count-active")
     Long countActiveSubscriptions();
+
 }

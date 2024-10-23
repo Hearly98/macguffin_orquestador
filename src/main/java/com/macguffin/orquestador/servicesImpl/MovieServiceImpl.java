@@ -35,4 +35,5 @@ public class MovieServiceImpl implements MovieService {
         return new ResponseEntity<>(movieFeignClient.updateMovie(movieId, movieUpdateDTO), HttpStatus.OK);
     }
 
+
 }

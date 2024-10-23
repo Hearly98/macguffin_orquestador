@@ -12,5 +12,6 @@ public class MovieDTO {
     private String description;
     private Long release_year;
     private String poster_url;
+    private String movie_Url;
     private GenreDTO genre;
 }
